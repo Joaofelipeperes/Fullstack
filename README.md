@@ -46,22 +46,35 @@ src/
 
 ## 📦 Como Executar
 
-1. Clone o repositório:
+### 1. Clone o repositório:
+
 ```bash
 git clone https://github.com/Joaofelipeperes/Fullstack.git
 cd Fullstack
 ```
 
-2. Configure o banco de dados no application.properties
+### 2. Configure o banco de dados no "application.properties"
 
-3. Compile e execute o projeto:
+Exemplo de configuração:
+
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/dev_full_stack
+spring.datasource.username=postgres
+spring.datasource.password=aula321
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+```
+
+### 3. Compile e execute o projeto:
 ```bash
 mvn spring-boot:run
 ```
-4. Acesse a API em: http://localhost:8080/calendarios
 
-5. Exemplo de JSON para POST
+### 4. Acesse a API em: http://localhost:8080/calendarios
 
+### 5. Exemplo de JSON para POST
 ```
 {
   "nome": "Calendário Acadêmico 2025",
