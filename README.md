@@ -4,7 +4,7 @@ Grupo:
 - Philippe Augusto Monteiro Silva
 - Joao Felipe Peres Lima
 - Andressa Almeida dos Santos
-- Rilbert 
+- Rilbert Fernando Teixeira Santos 
 
 Este é um projeto backend desenvolvido com **Spring Boot**, que expõe uma API REST para gerenciar entidades do tipo `Calendario`. Ele fornece endpoints para operações básicas de **CRUD** (Create, Read, Update, Delete).
 
