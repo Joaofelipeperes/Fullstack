@@ -1,12 +1,9 @@
 package com.fullstack.projeto.controller;
-
-import com.fullstack.projeto.repository.*;
-import com.fullstack.projeto.model.*;
-
+import com.fullstack.projeto.model.Calendario;
+import com.fullstack.projeto.services.CalendarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -15,38 +12,34 @@ import java.util.Optional;
 public class CalendarioResources {
 
     @Autowired
-    private CalendarioRepository calendarioRepository;
+    private CalendarioService calendarioService;
 
     @GetMapping
     public List<Calendario> listarTodos() {
-        return calendarioRepository.findAll();
+        return calendarioService.listarTodos();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Calendario> buscarPorId(@PathVariable Long id) {
-        Optional<Calendario> calendario = calendarioRepository.findById(id);
+        Optional<Calendario> calendario = calendarioService.buscarPorId(id);
         return calendario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Calendario criar(@RequestBody Calendario calendario) {
-        return calendarioRepository.save(calendario);
+        return calendarioService.criar(calendario);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Calendario> atualizar(@PathVariable Long id, @RequestBody Calendario calendarioAtualizado) {
-        Optional<Calendario> calendarioExistente = calendarioRepository.findById(id);
-        if (calendarioExistente.isPresent()) {
-            calendarioAtualizado.setId(id);
-            return ResponseEntity.ok(calendarioRepository.save(calendarioAtualizado));
-        }
-        return ResponseEntity.notFound().build();
+        Optional<Calendario> atualizado = calendarioService.atualizar(id, calendarioAtualizado);
+        return atualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        if (calendarioRepository.existsById(id)) {
-            calendarioRepository.deleteById(id);
+        boolean deletado = calendarioService.deletar(id);
+        if (deletado) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
