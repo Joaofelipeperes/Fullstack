@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Home, Event } from '@mui/icons-material';
+import DehazeIcon from '@mui/icons-material/Dehaze';
+
 import './style.css';
 
 const dadosCalendario = [
@@ -44,9 +46,12 @@ function Calendario() {
     <Box sx={{ display: 'flex', height: '100vh', flexDirection: 'column' }}>
       {/* Barra superior com logo */}
       <Toolbar>
-        <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          SOCC
-        </Typography>
+        <Box display="flex" alignItems="center" gap={3}>
+          <DehazeIcon fontSize="medium" />
+          <Typography variant="h3" component="div">
+            SOCC
+          </Typography>
+        </Box>
       </Toolbar>
 
       {/* Corpo da página com Sidebar e conteúdo */}
@@ -54,8 +59,8 @@ function Calendario() {
         {/* Sidebar */}
         <Box className="sidebar">
           <ul className="sidebar-menu">
-            <li><Home fontSize="small" /> <span>Página Inicial</span></li>
-            <li className="ativo"><Event fontSize="small" /> <span>Calendário</span></li>
+            <li><Home fontSize="medium" /> <span>Página Inicial</span></li>
+            <li className="ativo"><Event fontSize="medium" /> <span>Calendário</span></li>
           </ul>
         </Box>
 
