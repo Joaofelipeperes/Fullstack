@@ -105,6 +105,7 @@ function EditarCalendario() {
     }
     console.log("Dados a serem editados:", dadosParaEnviar);
     alert("Dados editados (verifique o console para os dados formatados)!");
+    navigate('/calendario');
     // Redirecionar de volta para a página do calendário ou mostrar uma mensagem de sucesso
   };
 

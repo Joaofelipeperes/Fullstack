@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.fullstack.projeto.model.Calendario;
 import com.fullstack.projeto.repository.CalendarioRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CalendarioService {
 
@@ -45,4 +47,10 @@ public class CalendarioService {
         }
         return false;
     }
+
+    @Transactional
+    public void deletarByAnoSemestre(String anoSemestre) {
+        calendarioRepository.deleteAllByAnoSemestre(anoSemestre);
+    }
 }
+

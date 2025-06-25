@@ -76,6 +76,22 @@ function Calendario() {
     navigate('/calendario/cadastrar');
   };
 
+  const handleExcluirClick = async () => {
+    try {
+      const valorFormatado = anoSemestre.replace('/', '.');
+      const response = await axios.delete(`http://localhost:8080/calendarios/ano-semestre/${valorFormatado}`);
+      console.log('Item deletado com sucesso:', response.data);
+
+      // Limpar a lista de calendários após exclusão
+      setCalendarios([]);
+      setModalAberto(false);
+
+    } catch (error) {
+      console.error('Erro ao deletar o item:', error);
+      setModalAberto(false);
+    }
+  };
+
   // Buscar todos os calendarios
   // React.useEffect(() => {
   //   axios.get('http://localhost:8080/calendarios')
@@ -167,7 +183,15 @@ function Calendario() {
               <Box display="flex" gap={1}>
                 <Button variant="contained" sx={{ backgroundColor: '#004c6d' }} onClick={handleCriarClick} >Criar</Button>
                 <Button variant="contained" sx={{ backgroundColor: '#76c7e0' }} onClick={handleEditarClick} >Editar</Button>
-                <Button variant="contained" sx={{ backgroundColor: '#d84315' }} onClick={() => setModalAberto(true)}>Excluir</Button>
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: '#d84315' }}
+                  onClick={() => {
+                    setModalAberto(true);
+                  }}
+                >
+                  Excluir
+                </Button>
               </Box>
             </Box>
 
@@ -204,7 +228,7 @@ function Calendario() {
           <Typography variant="body1" mb={2}>Deseja deletar o calendário?</Typography>
           <Box display="flex" justifyContent="flex-end" gap={2}>
             <Button onClick={() => setModalAberto(false)} sx={{ color: '#d84315' }}>CANCELAR</Button>
-            <Button variant="text" sx={{ color: '#d84315', fontWeight: 'bold' }}>CONFIRMAR</Button>
+            <Button onClick={handleExcluirClick} variant="text" sx={{ color: '#d84315', fontWeight: 'bold' }}>CONFIRMAR</Button>
           </Box>
         </Box>
       </Modal>

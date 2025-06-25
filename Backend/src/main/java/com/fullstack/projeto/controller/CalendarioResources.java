@@ -60,6 +60,12 @@ public class CalendarioResources {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/ano-semestre/{anoSemestre}")
+    public ResponseEntity<Void> deletarByAnoSemestre(@PathVariable String anoSemestre) {
+        calendarioService.deletarByAnoSemestre(anoSemestre);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
     @GetMapping("/welcome")
     public String welcome() {
         return "Welcome to Spring Boot";

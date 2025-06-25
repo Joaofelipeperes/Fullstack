@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.fullstack.projeto.model.Calendario;
 
 public interface CalendarioRepository extends JpaRepository<Calendario, Long> {
-    List<Calendario> findAllByAnoSemestre(String anoSemestre);;
+    List<Calendario> findAllByAnoSemestre(String anoSemestre);
+    void deleteAllByAnoSemestre(String anoSemestre);
 }
