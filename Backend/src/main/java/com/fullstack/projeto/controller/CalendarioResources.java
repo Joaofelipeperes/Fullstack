@@ -1,11 +1,20 @@
 package com.fullstack.projeto.controller;
-import com.fullstack.projeto.model.Calendario;
-import com.fullstack.projeto.services.CalendarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fullstack.projeto.model.Calendario;
+import com.fullstack.projeto.services.CalendarioService;
 
 @RestController
 @RequestMapping("/calendarios")
@@ -23,6 +32,12 @@ public class CalendarioResources {
     public ResponseEntity<Calendario> buscarPorId(@PathVariable Long id) {
         Optional<Calendario> calendario = calendarioService.buscarPorId(id);
         return calendario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/ano-semestre/{anoSemestre}")
+    public ResponseEntity<List<Calendario>> getPorAnoSemestre(@PathVariable String anoSemestre) {
+        List<Calendario> resultados = calendarioService.findByAnoSemestre(anoSemestre);
+        return ResponseEntity.ok(resultados);
     }
 
     @PostMapping
